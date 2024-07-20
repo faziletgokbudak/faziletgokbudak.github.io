@@ -10,7 +10,7 @@ Siggraph is a dream world for computer graphics enthusiasts. This summer, I atte
 
 ---
 
-<img align="right" width="25%" src="assets/img/Siggraph/LA-convention-centre.jpeg">
+<img align="right" width="25%" src="/Siggraph/LA-convention-centre.jpeg">
 This summer, I had the chance to attend Siggraph 2023 in Los Angeles thanks to the generous travel grant Queens’ and the Department of Computer Science and Technology offered me. Siggraph is the world's largest and most influential annual conference on computer graphics and interactive techniques. It is a unique conference in the sense that not only academicians attend but also people from the film or tech industry gather together to follow up with the latest developments in computer graphics. It was my first time attending this outstanding conference, and as a PhD student researching computer graphics applications, I feel incredibly happy to be given this chance.
 
 
