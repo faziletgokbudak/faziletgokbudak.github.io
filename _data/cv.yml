@@ -3,6 +3,8 @@
   contents:
     - name: Full Name
       value: Fazilet Gokbudak
+    - name: Coding
+      value: Python, TensorFlow, PyTorch, MATLAB, LaTeX, AWS, Git, HTML
     - name: Languages
       value: English (Fluent), Turkish (Native), German (Intermediate)
 
@@ -11,7 +13,7 @@
   contents:
     - title: PhD
       institution: University of Cambridge, Cambridge, UK
-      year: 2020-present
+      year: 2020-Now
       description:
         - title: Data-efficient Neural Appearance Manipulations
           contents:
@@ -39,7 +41,7 @@
         - Introduced a local histogram loss function through curated face segmentation masks for more optimal and realistic results, overall reducing artifacts related to skin tone transfer.
     - title: Part-time Research Assistant
       institution: University of Cambridge, UK
-      year: November 2020 - January 2022
+      year: Nov'20 - Jan'22
       description:
         - Led the Cambridge side of a computer vision-based blackgrass detection project, working with researchers from
           the University of Lincoln.
@@ -47,26 +49,30 @@
 
     - title: App Developer
       institution: Freelance, Istanbul, Turkey.
-      year: Feb 2020 - Sept 2020
+      year: Feb - Sept 2020
 
-- title: Open Source Projects
+#- title: Open Source Projects
+#  type: time_table
+#  contents:
+#    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
+#      year: 2015-now
+#      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+
+- title: Scholarships and Awards
   type: time_table
   contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
-
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 1921
+    - year: 2023
       items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
+        - Graduate Student Travel Award, Queens’ College
+    - year: 2020
       items:
-        - Max Planck Medal
-
+        - Computer Laboratory Studentship, full funding for my PhD research
+    - year: 2018
+      items:
+        - Dean’s High Honor Certificate, Bogazici University
+    - year: 2009-2018
+      items:
+        - Private Scholarship, TEKFEN Holding. For high achievement in both national high school and university placement exams. Ranked 185 over 2 million test takers in the university placement exam.
 - title: Academic Interests
   type: nested_list
   contents:
