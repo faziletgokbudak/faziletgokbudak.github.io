@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I will be reviewing for ECCV'24 - Women in Computer Vision (WiCV) Workshop ✍️ 😊.
+I will be reviewing for ECCV'24 - Women in Computer Vision (WiCV) Workshop ✍️.
