@@ -7,7 +7,7 @@ subtitle: Final-year PhD Student at University of Cambridge
 profile:
   align: right
   image: sketch_prof_pic.JPEG
-  image_circular: false # crops the image to make it circular
+  image_circular: true # crops the image to make it circular
   more_info: >
     <p>SS15, </p>
     <p>William Gates Building</p>
