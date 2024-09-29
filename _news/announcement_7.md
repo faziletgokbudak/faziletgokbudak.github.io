@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-My work "Text-guided Transient Attribute Transfer" is accepted at Women in Machine Learning (WiCV) Workshop at NeurIPS'24🥳.
+My work "Text-guided Transient Attribute Transfer" is accepted at Women in Machine Learning (WiML) Workshop at NeurIPS'24🥳.
