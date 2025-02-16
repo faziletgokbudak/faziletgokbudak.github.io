@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Our HyperBRDF paper got accepted to ECCV'24🥳.
+Our HyperBRDF paper is accepted to ECCV'24. 🥳

@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-I will be reviewing for NeurIPS'24 Women in Machine Learning (WiML) Workshop ✍️.
+I am reviewing for NeurIPS'24 Women in Machine Learning (WiML) and ECCV'24 - Women in Computer Vision (WiCV) Workshops. ✍️
