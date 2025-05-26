@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2025-02-16
+date: 2025-05-26
 inline: true
 related_posts: false
 ---
 
-I passed my PhD defence with minor corrections! 🎉🥳🎊 
+My thesis is now available online. 😊 [Thesis](https://www.repository.cam.ac.uk/items/b75e06c4-d197-4bda-a3c7-7ebdd2d46c51)📚
