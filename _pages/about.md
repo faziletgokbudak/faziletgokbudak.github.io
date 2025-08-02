@@ -10,7 +10,7 @@ profile:
   image: profile_pic.png
   image_circular: true # crops the image to make it circular
   more_info: >
-    <p style="font-size: 0.8rem; text-align: center; font-style: italic;">From Turkey, now based in Cambridge. Interested in machine learning, visual understanding, and how machines perceive the world.</p>
+    <p style="font-size: 0.8rem; text-align: center; font-style: italic;">From Turkey, based in Cambridge, working on camera tech. Enthusiastic about machine learning, computer vision, graphics, and photography.</p>
 
 [comment]: <> (    <p>Apple Research</p>)
 
