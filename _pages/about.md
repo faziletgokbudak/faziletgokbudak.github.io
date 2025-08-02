@@ -18,12 +18,16 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Hello, welcome to my website! I am currently an ML Researcher/Engineer at Apple, working on algorithm development for iPhone cameras.
-Prior to that, I was a PhD student at University of Cambridge, working on ML-based appearance editing and modelling.
+Hello, welcome to my website! 
 
-I hold an MSc in signal processing and communications from the University of Edinburgh and a BSc in electrical and electronics engineering from Bogazici University, Turkey.
-In my 2nd year, I spent the summer interning at Amazon as an applied scientist. 
+I’m a Machine Learning Researcher/Engineer at Apple, working on algorithm development for iPhone cameras, combining applied machine learning with computational photography and real-world deployment.
 
-In my spare time, I actively volunteer for Women in CS initiatives, enjoy photography, swimming, and running.
+Prior to that, I completed my PhD at the University of Cambridge, where I worked on ML-based appearance editing and modeling. I also hold an MSc in Signal Processing and Communications from the University of Edinburgh and a BSc in Electrical and Electronics Engineering from Boğaziçi University.
 
-My current research interests include generative models for computer vision, inverse rendering and appearance representations. Please feel free to contact if you would like to discuss any ideas!
+During my studies, I interned at Amazon as an Applied Scientist, working on generative models for a conditional image generation task. My work contributed to exploratory research efforts and offered practical solutions to a real-world problem.
+
+My research interests include generative models for computer vision, inverse rendering, and neural appearance representations. I’m also interested in broader topics within computer vision and graphics, and open to related areas where machine learning can be applied creatively.
+
+Outside of work, I actively volunteer for Women in CS initiatives and enjoy photography, swimming, and running.
+
+Always happy to discuss shared research interests or collaboration ideas. Feel free to reach out!
