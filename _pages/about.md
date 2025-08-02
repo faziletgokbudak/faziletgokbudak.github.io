@@ -18,16 +18,14 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Hello, welcome to my website! 
+Hello, welcome to my website! I am currently an ML Researcher/Engineer at Apple, working on algorithm development for iPhone cameras.
 
-I’m a Machine Learning Researcher/Engineer at Apple, working on algorithm development for iPhone cameras, combining applied machine learning with computational photography and real-world deployment.
-
-Prior to that, I completed my PhD at the University of Cambridge, where I worked on ML-based appearance editing and modeling. I also hold an MSc in Signal Processing and Communications from the University of Edinburgh and a BSc in Electrical and Electronics Engineering from Boğaziçi University.
+I recently completed my PhD at the University of Cambridge, where I worked on ML-based appearance editing and modeling. I also hold an MSc in Signal Processing and Communications from the University of Edinburgh and a BSc in Electrical and Electronics Engineering from Boğaziçi University.
 
 During my studies, I interned at Amazon as an Applied Scientist, working on generative models for a conditional image generation task. My work contributed to exploratory research efforts and offered practical solutions to a real-world problem.
 
-My research interests include generative models for computer vision, inverse rendering, and neural appearance representations. I’m also interested in broader topics within computer vision and graphics, and open to related areas where machine learning can be applied creatively.
-
 Outside of work, I actively volunteer for Women in CS initiatives and enjoy photography, swimming, and running.
 
-Always happy to discuss shared research interests or collaboration ideas. Feel free to reach out!
+My research interests include generative models for computer vision, inverse rendering, and appearance representations.
+
+I’m always happy to discuss shared research interests or ideas. Feel free to reach out!
