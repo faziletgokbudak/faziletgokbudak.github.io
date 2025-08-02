@@ -3,15 +3,18 @@ layout: about
 title: about
 permalink: /
 subtitle: ML Researcher at Apple
+cover_image: cover_image_2.jpeg
 
 profile:
   align: right
   image: profile_pic.png
   image_circular: true # crops the image to make it circular
   more_info: >
-    <p>30 Station Rd, </p>
-    <p>Apple Research</p>
-    <p>Cambridge, UK</p>
+    <p style="font-size: 0.8rem; text-align: center; font-style: italic;">From Turkey, now based in Cambridge. Interested in machine learning, visual understanding, and how machines perceive the world.</p>
+
+[comment]: <> (    <p>Apple Research</p>)
+
+[comment]: <> (    <p>Cambridge, UK</p>)
 
 news: true # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
