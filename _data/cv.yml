@@ -50,7 +50,7 @@
       year: Nov'20 - Jan'22
       description:
         - Led the Cambridge side of a joint vision-based blackgrass detection project with the University of Lincoln.
-        - Trained a ResNet classifier on a novel agricultural dataset, achieving 80\% accuracy — the final milestone of a startup-oriented initiative.
+        - Trained a ResNet classifier on a novel agricultural dataset, achieving 80% accuracy — the final milestone of a startup-oriented initiative.
         - Co-authored a resulting publication; contributed to model design, evaluation, and early commercialization exploration.
     - title: Software Developer
       institution: Freelance, Istanbul, Turkey.
@@ -127,8 +127,3 @@
       value: GirlsWhoML Co-chair @ University of Cambridge. Organized and ran workshops on ML fundamentals and Python programming.
     - name: Women@CL
       value: Co-chair for Oxbridge Women in Computer Science Conference @ University of Cambridge.
-
-- title: Other Interests
-  type: list
-  contents:
-    - <u>Hobbies:</u> Photography, Perspective drawing, Swimming.
