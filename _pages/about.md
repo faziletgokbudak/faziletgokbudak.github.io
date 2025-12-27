@@ -2,15 +2,15 @@
 layout: about
 title: about
 permalink: /
-subtitle: ML Researcher at Apple
-cover_image: cover_image_2.jpeg
+subtitle: Machine Learning Researcher at Apple
+cover_image: cover_photo.JPG
 
 profile:
   align: right
-  image: profile_pic.png
+  image: profile_pic2.png
   image_circular: true # crops the image to make it circular
   more_info: >
-    <p style="font-size: 0.8rem; text-align: center; font-style: italic;"> From Turkey, based in Cambridge, working on camera software. Interested in machine learning, visual computing; enjoy photography.</p>
+    <p style="font-size: 0.8rem; text-align: center; font-style: italic;">  Enthusiastic about visual computing and intelligence; specifically enjoy creative aspects of visual data ranging from photography to 3D rendering.</p>
 
 [comment]: <> (    <p>Apple Research</p>)
 
@@ -21,14 +21,14 @@ selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 ---
 
-Hello, welcome to my website! I am currently an ML Researcher/Engineer at Apple, working on algorithm development for iPhone cameras.
+Hello, welcome to my website! 
 
-I recently completed my PhD at the University of Cambridge, where I worked on ML-based appearance editing and modeling. I also hold an MSc in Signal Processing and Communications from the University of Edinburgh and a BSc in Electrical and Electronics Engineering from Boğaziçi University.
+I am currently working on algorithm development for iPhone cameras 📸. Earlier, I studied a PhD in Computer Science at the University of Cambridge and had the chance to work on ML-based appearance editing and modeling. My earlier education path and other details can be found on cv section.
 
-During my studies, I interned at Amazon as an Applied Scientist, working on generative models for a conditional image generation task. My work contributed to exploratory research efforts and offered practical solutions to a real-world problem.
+[comment]: <> (During my studies, I interned at Amazon as an Applied Scientist, working on generative models for a conditional image generation task. My work contributed to exploratory research efforts and offered practical solutions to a real-world problem.)
 
-Outside of work, I actively volunteer for Women in CS initiatives and enjoy photography, swimming, and running.
+My experience and interests involve generative models, including diffusion models and transformers, neural implicit representations, and appearance modelling. I have recently developed interest in physics-based world/video models with the thought that appearance can be more accurately modelled/controlled through scene understanding.
 
-My research interests include generative models for computer vision, inverse rendering, and appearance representations.
+Happy to discuss shared research interests and ideas. Feel free to reach out!
 
-I’m always happy to discuss shared research interests or ideas. Feel free to reach out!
+Also, outside of work, I actively volunteer for Women in CS initiatives and enjoy photography, running, and swimming.
