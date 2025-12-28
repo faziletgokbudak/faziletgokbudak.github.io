@@ -1,8 +1,8 @@
-- title: General Information
+- title: Overview
   type: map
   contents:
     - name: Software
-      value: Python, PyTorch, TensorFlow, Git, Blender, Mitsuba, LaTeX, Obj-C (basic), Metal (basic)
+      value: "Python (PyTorch, TensorFlow), Git, LaTeX<br> Blender, Mitsuba, Obj-C (basic), Metal (basic)"
     - name: Languages
       value: English (Fluent), Turkish (Native), German (Intermediate)
 
@@ -14,7 +14,7 @@
       year: 2020-2024
       description:
         - Data-efficient Neural Appearance Manipulations
-        - Passed without corrections, examined by Prof Pietro Lio, Dr Duygu Ceylan.
+        - "Passed without corrections (examiners: Prof. Pietro Liò, Dr. Duygu Ceylan)."
     - title: MSc
       institution: The University of Edinburgh
       year: 2018-2019
@@ -33,30 +33,29 @@
       institution: Apple
       year: Oct'24 - Present
       description:
-        - Contributing to research and development of GenAI features for image/video processing and enhancement.
+        - Contributing to research and development of GenAI features for image/video processing and enhancement for iPhone cameras.
         - Bridging model development and product deployment, collaborating with cross-functional teams.
         - Exploring novel approaches at the intersection of vision, graphics, and learning that involve GenAI model and data generation pipelines.
-
     - title: Applied Scientist Intern
       institution: Amazon Science
       year: Summer 2022
       description:
-        - Developed a GAN-based image-to-image translation model with a local histogram loss for improved skin tone fidelity.
-        - Created custom face segmentation masks to guide learning and reduce artifacts.
-        - Delivered experimental results and final presentation to the applied science team.
+        - Developed a GAN-based image-to-image translation model incorporating a local histogram loss to improve skin tone fidelity.
+        - Designed custom face segmentation masks to guide learning and reduce visual artifacts.
+        - Presented experimental findings and final results to the applied science team.
     - title: Research Assistant
       institution: University of Cambridge, UK
       year: Nov'20 - Jan'22
       description:
         - Led the Cambridge side of a joint vision-based blackgrass detection project with the University of Lincoln.
-        - Trained a ResNet classifier on a novel agricultural dataset, achieving 80% accuracy — the final milestone of a startup-oriented initiative.
-        - Co-authored a resulting publication; contributed to model design, evaluation, and early commercialization exploration.
+        - Co-authored a publication; contributed to model design, evaluation, and early commercialization exploration.
+        - Trained a ResNet classifier on a novel agricultural dataset as the final milestone of the startup-oriented initiative.
     - title: Software Developer
       institution: Freelance, Istanbul, Turkey.
       year: Feb - Sept 2020
       description:
         - Developed an Android app prototype using the Kivy framework in Python for a tech startup.
-        - Built custom UI widgets and implemented image-based features using hash coding techniques.
+        - Built custom UI widgets and implemented image-based features using hash-based image retrieval techniques.
         - Managed codebase with Git and collaborated remotely with product stakeholders.
 
 #- title: Open Source Projects
@@ -101,12 +100,12 @@
 - title: Research Interests
   type: nested_list
   contents:
-    - title: Computer vision/graphics/photography
+    - title: Computer vision / graphics / photography
       items:
-        - Generative models for computer vision
-        - Appearance modelling
-        - Inverse rendering
-        - World/video models
+        - Generative models for computer vision<br>
+          (world and image/video models)
+        - Scene understanding<br>
+          (including appearance modeling and inverse rendering)
 
 - title: Academic & Extracurricular Activities
   type: map

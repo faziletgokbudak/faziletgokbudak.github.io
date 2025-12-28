@@ -23,12 +23,12 @@ social: true # includes social icons at the bottom of the page
 
 Hello, welcome to my website! 
 
-I am currently working on algorithm development for iPhone cameras 📸. Earlier, I studied a PhD in Computer Science at the University of Cambridge and had the chance to work on ML-based appearance editing and modeling. My earlier education path and other details can be found on cv section.
+I am currently working on algorithm development for iPhone cameras 📸. Earlier, I studied a PhD in Computer Science at the University of Cambridge and had the chance to work on ML-based appearance editing and modeling. My earlier education path and other details can be found on CV section.
 
 [comment]: <> (During my studies, I interned at Amazon as an Applied Scientist, working on generative models for a conditional image generation task. My work contributed to exploratory research efforts and offered practical solutions to a real-world problem.)
 
 My experience and interests involve generative models, including diffusion models and transformers, neural implicit representations, and appearance modelling. I have recently developed interest in physics-based world/video models with the thought that appearance can be more accurately modelled/controlled through scene understanding.
 
-Happy to discuss shared research interests and ideas. Feel free to reach out!
+Outside of work, I volunteer with Women in CS initiatives, enjoy photography, running, and swimming.
 
-Also, outside of work, I actively volunteer for Women in CS initiatives and enjoy photography, running, and swimming.
+Happy to discuss shared research interests and ideas. Feel free to reach out!
