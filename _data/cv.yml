@@ -1,8 +1,10 @@
 - title: General Information
   type: map
   contents:
-    - name: Software
-      value: Python, PyTorch, TensorFlow, Git, Blender, Mitsuba, LaTeX, Obj-C (basic), Metal (basic)
+    - name: Full Name
+      value: Fazilet Gokbudak
+    - name: Coding
+      value: Python, PyTorch, TensorFlow, MATLAB, Git, LaTeX, HTML, AWS, Objective-C (basic), Metal (basic)
     - name: Languages
       value: English (Fluent), Turkish (Native), German (Intermediate)
 
@@ -10,32 +12,31 @@
   type: time_table
   contents:
     - title: PhD
-      institution: University of Cambridge
+      institution: University of Cambridge, Cambridge, UK
       year: 2020-2024
       description:
         - Data-efficient Neural Appearance Manipulations
-        - Passed without corrections, examined by Prof Pietro Lio, Dr Duygu Ceylan.
     - title: MSc
-      institution: The University of Edinburgh
+      institution: The University of Edinburgh, Edinburgh, UK
       year: 2018-2019
       description:
-        - Signal Processing and Communations, Distinction
+        - Signal Processing and Communations
 
     - title: BSc
-      institution: Bogazici University, Turkey
+      institution: Bogazici University, Istanbul, Turkey
       year: 2014-2018
       description:
-        - Electrical and Electronics Engineering, High Honors
+        - Electrical and Electronics Engineering
 - title: Experience
   type: time_table
   contents:
     - title: Machine Learning Researcher
       institution: Apple
-      year: Oct'24 - Present
+      year: Present
       description:
-        - Contributing to research and development of GenAI features for image/video processing and enhancement.
+        - Contributing to research and development of ML models for image/video processing and enhancement.
         - Bridging model development and product deployment, collaborating with cross-functional teams.
-        - Exploring novel approaches at the intersection of vision, graphics, and learning that involve GenAI model and data generation pipelines.
+        - Exploring novel approaches at the intersection of vision, graphics, and learning.
 
     - title: Applied Scientist Intern
       institution: Amazon Science
@@ -69,12 +70,12 @@
 - title: Scholarships and Awards
   type: time_table
   contents:
-    - year: 2020 - 2024
-      items:
-        - Computer Laboratory Studentship, full funding for my PhD research
     - year: 2023
       items:
         - Graduate Student Travel Award, Queens’ College
+    - year: 2020 - Now
+      items:
+        - Computer Laboratory Studentship, full funding for my PhD research
     - year: 2018
       items:
         - Dean’s High Honor Certificate, Bogazici University
@@ -101,21 +102,28 @@
 - title: Research Interests
   type: nested_list
   contents:
-    - title: Computer vision/graphics/photography
+    - title: Computer Vision/Graphics
       items:
-        - Generative models for computer vision
+        - Image manipulation/generation
         - Appearance modelling
         - Inverse rendering
-        - World/video models
+    - title: Deep Learning
+      items:
+        - Generative models for computer vision
+        - Generalization in machine learning
 
 - title: Academic & Extracurricular Activities
   type: map
   contents:
     - name: Mentor
-      value: WiCV Workshop @ CVPR 2025
+      value: Women in Computer Vision Workshop @ CVPR 2025
     - name: Reviewer
-      value: WiML Workshop @ NeurIPS 2024, WiCV Workshop @ ECCV 2024
-    - name: Hackathon participant
+      value: Women in Machine Learning Workshop @ NeurIPS 2024
+    - name: Reviewer
+      value: Women in Computer Vision Workshop @ ECCV 2024
+    - name: Hackathon Participant
       value: 3rd place in zero-shot diffusion image restoration challenge, organised by @ Alan Turing Institute, July 2024.
     - name: Women@CL
-      value: Co-chairs for GirsWhoML workshops and Oxbridge Women in Computer Science Conference @ University of Cambridge.
+      value: GirlsWhoML Co-chair @ University of Cambridge. Organized and ran workshops on ML fundamentals and Python programming.
+    - name: Women@CL
+      value: Co-chair for Oxbridge Women in Computer Science Conference @ University of Cambridge.
