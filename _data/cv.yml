@@ -31,18 +31,16 @@
   contents:
     - title: Machine Learning Researcher
       institution: Apple
-      year: Oct'24 - Present
+      year: Oct'24 - Aug'26
       description:
-        - Contributing to research and development of GenAI features for image/video processing and enhancement for iPhone cameras.
-        - Bridging model development and product deployment, collaborating with cross-functional teams.
-        - Exploring novel approaches at the intersection of vision, graphics, and learning that involve GenAI model and data generation pipelines.
+        - Contributed to the research and development of generative AI features for on-device image processing in iPhone cameras, spanning model design, training, and productization.
+        - Developed end-to-end GenAI frameworks and large-scale data generation pipelines for image-editing tasks, bridging model development and product deployment with cross-functional teams.
+        - "Investigated novel approaches at the intersection of computer vision, graphics, and machine learning. For a broader look at recent Apple Intelligence features, see <a href='https://www.apple.com/newsroom/2026/06/apple-intelligence-brings-powerful-ai-capabilities-into-everyday-experiences/' target='_blank' rel='noopener noreferrer'>some examples here</a>."
     - title: Applied Scientist Intern
       institution: Amazon Science
       year: Summer 2022
       description:
-        - Developed a GAN-based image-to-image translation model incorporating a local histogram loss to improve skin tone fidelity.
-        - Designed custom face segmentation masks to guide learning and reduce visual artifacts.
-        - Presented experimental findings and final results to the applied science team.
+        - Developed a GAN-based image-to-image translation model with a local histogram loss and custom face-segmentation masks to improve skin-tone fidelity and reduce visual artifacts.
     - title: Research Assistant
       institution: University of Cambridge, UK
       year: Nov'20 - Jan'22

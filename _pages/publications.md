@@ -5,6 +5,7 @@ title: research
 description:
 nav: true
 nav_order: 2
+nav_anchor: /#research
 ---
 
 <!-- _pages/publications.md -->
