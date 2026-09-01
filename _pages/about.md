@@ -16,6 +16,7 @@ profile:
 
 [comment]: <> (    <p>Cambridge, UK</p>)
 
+relight_medallion: sunset # profile photo in a cursor-lit orb, tinted to match the sunset cover; options: sunset|glass|frosted|chrome|gold|crystal|water|holo|amber (or 'demo' for the switcher); remove to disable
 news: true # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -23,7 +24,7 @@ social: true # includes social icons at the bottom of the page
 
 Hello, welcome to my website! 
 
-**Research:** I am currently a postdoctoral researcher at the University of Cambridge, working on visual computing, 3D computer vision, and machine learning. My research interests span generative models, computational photography, and 3D scene representations, with the aim of building photorealistic digital twins and worlds. During my PhD, I worked in the Computer Laboratory under Prof. Cengiz Öztireli, developing machine learning algorithms for image editing and material representations.
+**Research:** I am currently a postdoctoral researcher at the University of Cambridge, working on visual computing, 3D computer vision, and machine learning. My research interests span generative models, 3D scene representations, and computational photography, with the aim of building photorealistic digital twins and worlds. During my PhD, I worked in the Computer Laboratory under Prof. Cengiz Öztireli, developing machine learning algorithms for image editing and material representations.
 
 **Industry:** Before returning to Cambridge, I spent nearly 2 years at Apple, developing generative AI features for iPhone cameras 📸, including end-to-end GenAI frameworks and dataset pipelines for image editing tasks. During my PhD, I also interned at Amazon, working with GANs on a conditional image generation task.
 

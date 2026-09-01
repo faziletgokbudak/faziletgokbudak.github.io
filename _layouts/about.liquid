@@ -54,8 +54,15 @@ layout: default
           {% else %}
             {% assign profile_image_class = 'img-fluid z-depth-1 rounded' %}
           {% endif %}
-          {% capture sizes %}(min-width: {{site.max_width}}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px) 30vw, 95vw"{% endcapture %}
-          {% include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image cache_bust=true %}
+          {% if page.relight_medallion %}
+            <div id="relight-orb" class="relight-orb" data-material="{{ page.relight_medallion }}">
+              <canvas id="relight-gl"></canvas>
+              <img class="relight-fallback-img {{ profile_image_class }}" src="{{ profile_image_path | relative_url }}" alt="{{ page.profile.image }}" />
+            </div>
+          {% else %}
+            {% capture sizes %}(min-width: {{site.max_width}}) {{ site.max_width | minus: 30 | times: 0.3}}px, (min-width: 576px) 30vw, 95vw"{% endcapture %}
+            {% include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image cache_bust=true %}
+          {% endif %}
         {% endif %}
         {% if page.profile.more_info %}
           <div class="more-info">{{ page.profile.more_info }}</div>
@@ -102,3 +109,33 @@ layout: default
     {% endif %}
   </article>
 </div>
+
+{% if page.relight_medallion %}
+  <style>
+    .relight-orb {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+    }
+    .relight-orb canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 50%;
+      filter: drop-shadow(0 16px 26px rgba(18, 22, 30, 0.28));
+    }
+    /* the plain photo is the no-WebGL fallback; hidden once the canvas draws */
+    .relight-orb .relight-fallback-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .relight-orb.relight-ready .relight-fallback-img { visibility: hidden; }
+  </style>
+  <script defer src="{{ '/assets/js/relight-medallion.js' | relative_url }}"></script>
+{% endif %}

@@ -34,7 +34,7 @@
       year: Oct'24 - Aug'26
       description:
         - Contributed to the research and development of generative AI features for on-device image processing in iPhone cameras, spanning model design, training, and productization.
-        - Developed end-to-end GenAI frameworks and large-scale data generation pipelines for image-editing tasks, bridging model development and product deployment with cross-functional teams.
+        - Built end-to-end GenAI frameworks and large-scale data pipelines for scene-editing tasks — production-quality code with reviews and testing — bridging model development and deployment across cross-functional teams.
         - "Investigated novel approaches at the intersection of computer vision, graphics, and machine learning. For a broader look at recent Apple Intelligence features, see <a href='https://www.apple.com/newsroom/2026/06/apple-intelligence-brings-powerful-ai-capabilities-into-everyday-experiences/' target='_blank' rel='noopener noreferrer'>some examples here</a>."
     - title: Applied Scientist Intern
       institution: Amazon Science
