@@ -17,6 +17,7 @@ profile:
 [comment]: <> (    <p>Cambridge, UK</p>)
 
 relight_medallion: sunset # profile photo in a cursor-lit orb, tinted to match the sunset cover; options: sunset|glass|frosted|chrome|gold|crystal|water|holo|amber (or 'demo' for the switcher); remove to disable
+relight_cover: true # a soft warm light that follows the cursor across the cover banner; remove to disable
 news: true # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page

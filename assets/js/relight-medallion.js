@@ -86,7 +86,8 @@
     "  vec3 col = albedo * (0.88 + 0.12*NdotL);",
     "  col *= mix(1.0, 0.80, smoothstep(0.80, 1.0, sqrt(r2)));",
     "  float fres = 0.05 + 0.95*pow(1.0-VdotH, 5.0);",
-    "  col += uGlint * fres * pow(NdotH, uGlintExp) * uGlintGain;",
+    "  float glintMask = 1.0 - 0.82*smoothstep(0.55, 0.92, luma);",   // fade on bright/white areas
+    "  col += uGlint * fres * pow(NdotH, uGlintExp) * uGlintGain * glintMask;",
     "  float edge = pow(1.0-NdotV, 3.0);",
     "  vec3 rimc = uRim;",
     "  if(uIrid > 0.5){ rimc = 0.55 + 0.45*cos(6.28318*(vec3(0.0,0.33,0.67) + (1.0-NdotV)*1.25)); }",
