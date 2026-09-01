@@ -7,7 +7,6 @@ layout: default
 {% if page.cover_image %}
       {% assign cover_image_path = page.cover_image | prepend: 'assets/img/' %}
       <div
-        id="cover-banner"
         style="
           position: relative;
           width: 100vw;
@@ -30,29 +29,7 @@ layout: default
             object-fit: cover;
           "
         />
-        {% if page.relight_cover %}
-          <div id="cover-spot" class="cover-spot" aria-hidden="true"></div>
-        {% endif %}
       </div>
-      {% if page.relight_cover %}
-        <style>
-          .cover-spot {
-            position: absolute;
-            top: 0; left: 0;
-            width: 42vw; height: 42vw;
-            margin: -21vw 0 0 -21vw;
-            border-radius: 50%;
-            pointer-events: none;
-            mix-blend-mode: soft-light;
-            background: radial-gradient(circle, rgba(255,198,132,0.42) 0%, rgba(255,160,90,0.16) 38%, transparent 64%);
-            opacity: 0;
-            transition: opacity .45s ease;
-            will-change: transform, opacity;
-          }
-          @media (prefers-reduced-motion: reduce) { .cover-spot { transition: none; } }
-        </style>
-        <script defer src="{{ '/assets/js/relight-cover.js' | relative_url }}"></script>
-      {% endif %}
     {% endif %}
 
   <header class="post-header">
