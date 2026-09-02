@@ -26,11 +26,11 @@ Hello, welcome to my website!
 
 **Research:** I am currently a postdoctoral researcher at the University of Cambridge, working on visual computing, 3D computer vision, and machine learning. My research interests span generative models, 3D scene representations, and computational photography, with the aim of building photorealistic digital twins and worlds. During my PhD, I worked in the Computer Laboratory under Prof. Cengiz Öztireli, developing machine learning algorithms for image editing and material representations.
 
-**Industry:** Before returning to Cambridge, I spent nearly 2 years at Apple, developing generative AI features for iPhone cameras 📸, including end-to-end GenAI frameworks and dataset pipelines for image editing tasks. During my PhD, I also interned at Amazon, working with GANs on a conditional image generation task.
+**Industry:** Before returning to Cambridge, I spent nearly 2 years at Apple, developing generative AI features for iPhone cameras 📸, including end-to-end GenAI frameworks and dataset pipelines for scene editing tasks. During my PhD, I also interned at Amazon, working with GANs on a conditional image generation task.
 
 Outside of work, I volunteer with Women in CS initiatives and enjoy photography, running, and swimming.
 
-I love working on research problems with product-level impact, and I'm always happy to discuss research scientist/engineering roles. Feel free to reach out!
+I love working on research problems with product-level impact, and I'm always happy to discuss full- or part-time research, engineering, or consultancy roles. Feel free to reach out!
 
 <h2 id="research" style="scroll-margin-top: 5rem;">research</h2>
 
@@ -48,8 +48,9 @@ A few selected publications are below — see the <a href="{{ '/publications/' |
           {% if content.institution contains 'Apple' or content.institution contains 'Amazon' %}
             <li class="list-group-item">
               <div class="row">
-                <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px">
+                <div class="col-xs-2 cl-sm-2 col-md-2 text-center cv-datecol" style="width: 75px">
                   <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px">{{ content.year }}</span>
+                  {% if content.logo %}<img class="institution-logo" src="{{ '/assets/img/logos/' | append: content.logo | relative_url }}" alt="{{ content.institution }} logo" loading="lazy" />{% endif %}
                 </div>
                 <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
                   <h6 class="title font-weight-bold ml-1 ml-md-4">{{ content.title }}</h6>
@@ -81,8 +82,9 @@ A few selected publications are below — see the <a href="{{ '/publications/' |
         {% for content in education.contents %}
           <li class="list-group-item">
             <div class="row">
-              <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px">
+              <div class="col-xs-2 cl-sm-2 col-md-2 text-center cv-datecol" style="width: 75px">
                 <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px">{{ content.year }}</span>
+                {% if content.logo %}<img class="institution-logo" src="{{ '/assets/img/logos/' | append: content.logo | relative_url }}" alt="{{ content.institution }} logo" loading="lazy" />{% endif %}
               </div>
               <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
                 <h6 class="title font-weight-bold ml-1 ml-md-4">{{ content.title }}{% if content.institution %}, {{ content.institution }}{% endif %}</h6>

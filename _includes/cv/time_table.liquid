@@ -3,7 +3,7 @@
     <li class="list-group-item">
       <div class="row">
         {% if content.year %}
-          <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px">
+          <div class="col-xs-2 cl-sm-2 col-md-2 text-center cv-datecol" style="width: 75px">
             <table class="table-cv">
               <tbody>
                 <tr>
@@ -20,6 +20,13 @@
                         <i class="fa-solid fa-location-dot iconlocation"></i>
                         {{ content.location }}
                       </p>
+                    </td>
+                  </tr>
+                {% endif %}
+                {% if content.logo %}
+                  <tr>
+                    <td class="text-center">
+                      <img class="institution-logo" src="{{ '/assets/img/logos/' | append: content.logo | relative_url }}" alt="{{ content.institution }} logo" loading="lazy" />
                     </td>
                   </tr>
                 {% endif %}

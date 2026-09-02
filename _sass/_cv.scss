@@ -59,6 +59,26 @@ i.icondepartment {
   margin-right: 0.3rem;
 }
 
+.cv-datecol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img.institution-logo {
+  display: block;
+  height: 2.5rem;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  margin: auto;
+}
+
+/* per-logo size tweak: Amazon wordmark reads a touch larger */
+img.institution-logo[src*="amazon"] {
+  height: 3.2rem;
+}
+
 table.institution {
   margin-bottom: 1rem;
 }

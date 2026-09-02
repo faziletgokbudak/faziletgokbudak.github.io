@@ -11,18 +11,21 @@
   contents:
     - title: PhD
       institution: University of Cambridge
+      logo: cam_logo.png
       year: 2020-2024
       description:
         - Data-efficient Neural Appearance Manipulations
         - "Passed without corrections (examiners: Prof. Pietro Liò, Dr. Duygu Ceylan)."
     - title: MSc
       institution: The University of Edinburgh
+      logo: edi_logo.png
       year: 2018-2019
       description:
         - Signal Processing and Communations, Distinction
 
     - title: BSc
       institution: Bogazici University, Turkey
+      logo: boun_logo.webp
       year: 2014-2018
       description:
         - Electrical and Electronics Engineering, High Honors
@@ -31,6 +34,7 @@
   contents:
     - title: Machine Learning Researcher
       institution: Apple
+      logo: apple_logo.webp
       year: Oct'24 - Aug'26
       description:
         - Contributed to the research and development of generative AI features for on-device image processing in iPhone cameras, spanning model design, training, and productization.
@@ -38,11 +42,13 @@
         - "Investigated novel approaches at the intersection of computer vision, graphics, and machine learning. For a broader look at recent Apple Intelligence features, see <a href='https://www.apple.com/newsroom/2026/06/apple-intelligence-brings-powerful-ai-capabilities-into-everyday-experiences/' target='_blank' rel='noopener noreferrer'>some examples here</a>."
     - title: Applied Scientist Intern
       institution: Amazon Science
+      logo: amazon_logo.png
       year: Summer 2022
       description:
         - Developed a GAN-based image-to-image translation model with a local histogram loss and custom face-segmentation masks to improve skin-tone fidelity and reduce visual artifacts.
     - title: Research Assistant
       institution: University of Cambridge, UK
+      logo: cam_logo.png
       year: Nov'20 - Jan'22
       description:
         - Led the Cambridge side of a joint vision-based blackgrass detection project with the University of Lincoln.
