@@ -24,13 +24,13 @@ social: true # includes social icons at the bottom of the page
 
 Hello, welcome to my website! 
 
-**Research:** I am currently a postdoctoral researcher at the University of Cambridge, working on visual computing, 3D computer vision, and machine learning. My research interests span generative models, 3D scene representations, and computational photography, with the aim of building photorealistic digital twins and worlds. During my PhD, I worked in the Computer Laboratory under Prof. Cengiz Öztireli, developing machine learning algorithms for image editing and material representations.
+**Research:** I am currently a postdoctoral researcher at the University of Cambridge, working at the intersection of visual computing, 3D computer vision, and machine learning. My research interests span generative models, 3D scene representations, and computational photography, with a broader interest in learning rich, photorealistic representations of the visual world. During my PhD in the Computer Laboratory, supervised by Prof. Cengiz Öztireli, I developed machine learning methods for image manipulation and material representations.
 
 **Industry:** Before returning to Cambridge, I spent nearly 2 years at Apple, developing generative AI features for iPhone cameras 📸, including end-to-end GenAI frameworks and dataset pipelines for scene editing tasks. During my PhD, I also interned at Amazon, working with GANs on a conditional image generation task.
 
 Outside of work, I volunteer with Women in CS initiatives and enjoy photography, running, and swimming.
 
-I love working on research problems with product-level impact, and I'm always happy to discuss full- or part-time research, engineering, or consultancy roles. Feel free to reach out!
+I am always happy to discuss interesting research problems and collaborations. Feel free to reach out!
 
 <h2 id="research" style="scroll-margin-top: 5rem;">research</h2>
 
