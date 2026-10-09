@@ -3,7 +3,7 @@ layout: about
 title: about
 permalink: /
 subtitle: Research Associate at Cambridge University
-cover_image: cover_photo.JPG
+cover_image: baloonview.JPG
 
 profile:
   align: right
