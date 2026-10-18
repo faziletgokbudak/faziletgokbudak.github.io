@@ -7,7 +7,7 @@ cover_image: baloonview.JPG
 
 profile:
   align: right
-  image: IMG_0014.jpg
+  image: profile_pic.jpg
   image_circular: true # crops the image to make it circular
   more_info: >
     
@@ -16,7 +16,7 @@ profile:
 
 [comment]: <> (    <p>Cambridge, UK</p>)
 
-relight_medallion: glass # profile photo in a cursor-lit orb, neutral (no colour tint); options: sunset|glass|frosted|chrome|gold|crystal|water|holo|amber (or 'demo' for the switcher); remove to disable
+relight_medallion: neutral # profile photo in a cursor-lit orb, neutral (no colour tint); options: sunset|glass|frosted|chrome|gold|crystal|water|holo|amber (or 'demo' for the switcher); remove to disable
 news: true # includes a list of news items
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
