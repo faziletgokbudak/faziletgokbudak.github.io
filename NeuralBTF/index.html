@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Neural representations of measured BTFs, from one network per material to one 256-float code per material, and a class-conditional flow over the codes.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>One Code per Material: Neural Representation and Generation of Measured BTFs</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+
+  <style>
+    .figure-caption { font-size: 0.95rem; color: #4a4a4a; margin-top: 0.6rem; }
+    .chip-row { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 8px; }
+    .chip-row .button.is-selected { background: #363636; color: #fff; border-color: #363636; }
+    /* reconstruction comparison */
+    .cmp-wrap { position: relative; width: 100%; max-width: 520px; margin: 0 auto; aspect-ratio: 1 / 1;
+                cursor: ew-resize; user-select: none; touch-action: none; }
+    .cmp-wrap img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; }
+    .cmp-wrap .cmp-top { clip-path: inset(0 50% 0 0); }
+    .cmp-line { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; background: #fff;
+                box-shadow: 0 0 3px rgba(0,0,0,.6); pointer-events: none; }
+    .cmp-label { position: absolute; top: 8px; padding: 2px 8px; font-size: 0.8rem; color: #fff;
+                 background: rgba(0,0,0,.55); border-radius: 4px; pointer-events: none; }
+    .cmp-label.left { left: 8px; } .cmp-label.right { right: 8px; }
+    .slider-row { display: flex; align-items: center; gap: 10px; justify-content: center; margin: 10px auto; max-width: 520px; }
+    .slider-row input[type=range] { flex: 1; }
+    /* relighting */
+    .relight-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .relight-tile { aspect-ratio: 1 / 1; background-repeat: no-repeat; border-radius: 3px; }
+    .relight-cls { text-align: center; font-size: 0.8rem; color: #4a4a4a; }
+    @media (max-width: 700px) { .relight-grid { grid-template-columns: repeat(4, 1fr); } }
+    /* objects gallery */
+    .obj-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .obj-grid a { display: block; text-align: center; color: #4a4a4a; font-size: 0.8rem; }
+    .obj-grid img { width: 100%; aspect-ratio: 1 / 1; display: block; transition: transform .15s; }
+    .obj-grid a:hover img { transform: scale(1.04); }
+    @media (max-width: 700px) { .obj-grid { grid-template-columns: repeat(2, 1fr); } }
+    .obj-pop { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,.8);
+               align-items: center; justify-content: center; flex-direction: column; cursor: zoom-out; }
+    .obj-pop.is-open { display: flex; }
+    .obj-pop img { max-width: 92vw; max-height: 86vh; border-radius: 4px; box-shadow: 0 4px 24px rgba(0,0,0,.5); }
+    .obj-pop span { color: #eee; margin-top: 8px; font-size: 0.95rem; }
+    .obj-pop .obj-close { position: absolute; top: 12px; right: 20px; color: #fff; font-size: 2rem; line-height: 1; }
+  </style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-2 publication-title">One Code per Material: Neural Representation and Generation of Measured BTFs</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><a href="https://faziletgokbudak.github.io/">Fazilet Gokbudak</a>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=68FG9CoAAAAJ">Canberk Baykal</a>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=w14zy40AAAAJ">Chenliang Zhou</a>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=pJEb8x4AAAAJ">Rafal Mantiuk</a>,</span>
+            <span class="author-block"><a href="https://scholar.google.com/citations?user=dXt1WOUAAAAJ">Cengiz Oztireli</a></span>
+          </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">University of Cambridge</span>
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <span class="link-block">
+                <a href="https://arxiv.org/pdf/2611.20948" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span><span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2611.20948" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span><span>arXiv</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a class="external-link button is-normal is-rounded is-dark" disabled>
+                  <span class="icon"><i class="fab fa-github"></i></span><span>Code (coming soon)</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="./static/images/teaser.jpg" width="100%" alt="Studio scene rendered with measured and generated BTFs"/>
+      <h2 class="subtitle has-text-centered figure-caption">
+        <b>From measured to sampled BTFs in one scene,</b> rendered with Mitsuba 3.
+        Every textured surface is a BTF reproduced or generated by our models: the per-material networks and the compact
+        model represent measured materials, and the flow model samples further ones; only the paintings and plants use
+        standard textures. Close-ups: towards grazing angles, the relief of leather, fabric and carpet keeps the measured
+        shading and shadowing between neighbouring texels, an effect a per-texel SVBRDF cannot represent.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Measured bidirectional texture functions (BTFs) capture the full appearance of real materials&mdash;including
+            parallax, self-shadowing and inter-reflections that analytic SVBRDFs cannot express&mdash;but each measurement
+            is billions of values, and every new material requires a new capture. Existing neural BTF representations
+            encode each material as large per-texel latent maps rather than as a point in a shared space from which new
+            materials could be sampled.
+          </p>
+          <p>
+            We present neural representations of measured BTFs at two operating points. A per-material coordinate network
+            outperforms the recent neural BTF of Xia et al. at matched size (+3.2&nbsp;dB PSNR) and all prior baselines on
+            every metric. A compact model represents each material by a single 256-dimensional code that conditions a
+            shared decoder; it exceeds the PSNR (+1.2&nbsp;dB) and colour accuracy of the per-texel latent maps of Rainer
+            et al. with 256 numbers per material instead of millions, and one decoder shared by all materials.
+          </p>
+          <p>
+            Because each material is a single point in this code space, measured BTFs can be sampled: a class-conditional
+            flow over the codes, trained on the 84 materials enlarged with colourways and hue rotations, generates
+            materials that render and relight as full BTFs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">One code per material, on objects</h2>
+    <div class="obj-grid" id="obj-grid"></div>
+    <p class="figure-caption has-text-justified">
+      Measured materials, each represented by a single code and decoded as a full BTF, rendered on objects with
+      Mitsuba 3 under an outdoor environment map; the teal teapot is a hue rotation of carpet05 from our augmented
+      dataset. Click an image for the full-resolution render.
+    </p>
+  </div>
+  <div class="obj-pop" id="obj-pop"><a class="obj-close" aria-label="close">&times;</a><img id="obj-pop-img" alt=""><span id="obj-pop-cap"></span></div>
+</section>
+<script>
+  (function () {
+    var objs = [['testball_carpet07', 'carpet07'], ['testball_fabric01', 'fabric01'], ['testball_leather03', 'leather03'],
+                ['teapot_stone09', 'stone09'], ['teapot_leather10', 'leather10'], ['teapot_carpet05_hue3', 'carpet05, hue rotation'],
+                ['bunny_leather04', 'leather04'], ['bunny_leather07', 'leather07'], ['sdragon_stone03', 'stone03'],
+                ['sdragon_leather08', 'leather08'], ['seneca_stone05', 'stone05'], ['seneca_stone10', 'stone10'],
+                ['buddha_wood10', 'wood10'], ['drape_fabric06', 'fabric06'], ['drape_fabric09', 'fabric09'],
+                ['drape_fabric11', 'fabric11']];
+    var g = document.getElementById('obj-grid'), pop = document.getElementById('obj-pop'),
+        pimg = document.getElementById('obj-pop-img'), pcap = document.getElementById('obj-pop-cap');
+    objs.forEach(function (o) {
+      var a = document.createElement('a'); a.href = './static/images/objects/full/' + o[0] + '.jpg';
+      a.innerHTML = '<img loading="lazy" src="./static/images/objects/' + o[0] + '.webp" alt="' + o[1] + '">' + o[1];
+      a.addEventListener('click', function (e) {
+        e.preventDefault(); pimg.src = a.href; pimg.alt = o[1]; pcap.textContent = o[1]; pop.classList.add('is-open');
+      });
+      g.appendChild(a);
+    });
+    pop.addEventListener('click', function () { pop.classList.remove('is-open'); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') pop.classList.remove('is-open'); });
+  })();
+</script>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Overview</h2>
+    <img src="./static/images/overview.png" width="100%" alt="Method overview"/>
+    <p class="figure-caption has-text-justified">
+      The compact model encodes each measured material and its colourways into one 256-float code with a set encoder;
+      a decoder shared by all materials maps the code, texel position and light and view directions to RGB.
+      A class-conditional rectified flow fitted to these codes samples new codes, which the same decoder renders as
+      full BTFs that can be relit. Top right: measured materials reconstructed by the compact model, rendered on objects.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Reconstruction</h2>
+    <p class="has-text-centered" style="margin-bottom: 12px;">
+      Pick a material, a light&ndash;view pair and a method. Drag across the image to compare it with the measured BTF.
+    </p>
+    <div class="chip-row" id="mat-buttons"></div>
+    <div class="chip-row" id="meth-buttons"></div>
+    <div class="cmp-wrap" id="cmp">
+      <img id="cmp-gt" alt="measured">
+      <img id="cmp-top" class="cmp-top" alt="method">
+      <div class="cmp-line" id="cmp-line"></div>
+      <span class="cmp-label left" id="cmp-label-left">method</span>
+      <span class="cmp-label right">measured</span>
+    </div>
+    <div class="slider-row">
+      <span>light&ndash;view pair</span>
+      <input type="range" id="pair" min="0" max="7" value="0" step="1">
+      <span id="pair-label" style="min-width: 150px;"></span>
+    </div>
+    <p class="has-text-centered" id="psnr-label"></p>
+    <p class="figure-caption has-text-centered">
+      Nine UBO2014 materials at eight light&ndash;view pairs of the measured set; one exposure per material, the same
+      for every method. PSNR of this image against the measured image.
+    </p>
+    <div class="columns is-centered" style="margin-top: 1.5rem;">
+      <div class="column is-two-thirds">
+        <img src="./static/images/rd.png" width="100%" alt="Rate-distortion"/>
+        <p class="figure-caption has-text-centered">
+          <b>Rate&ndash;distortion</b> on the nine materials: PSNR against the number of values stored per material.
+          The compact model is shown with its 256-float code and with the shared decoder amortised over 84 materials.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Colourways</h2>
+    <div class="columns is-centered">
+      <div class="column is-three-quarters">
+        <img src="./static/images/colourways.jpg" width="100%" alt="Colourways"/>
+        <p class="figure-caption has-text-justified">
+          One measured material per row (left) and four of its colourways: its structure in the colours of other
+          materials of its class, as flash photographs. Every value is a measured value under one 3&times;3 colour
+          transform, so the colourways keep the structure, relief and shadowing of the measured BTFs.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Generation</h2>
+    <img src="./static/images/gen_compare.jpg" width="100%" alt="Generated materials"/>
+    <p class="figure-caption has-text-justified">
+      Generated materials as flash photographs: four random samples per class of each generator, without selection.
+      The Gaussian baselines sample our code space and are decoded by our decoder; Henzler et al. and PhotoMat are
+      retrained or fine-tuned on the same 886 training materials.
+    </p>
+
+    <h3 class="title is-4 has-text-centered" style="margin-top: 2.5rem;">Relighting generated materials</h3>
+    <p class="has-text-centered" style="margin-bottom: 10px;">
+      Every sample is a full BTF. Move the light with the slider.
+    </p>
+    <div class="relight-grid" id="relight-grid"></div>
+    <div class="slider-row">
+      <button class="button is-small is-rounded" id="relight-play">&#9654; play</button>
+      <span>light</span>
+      <input type="range" id="relight-slider" min="0" max="47" value="0" step="1">
+    </div>
+    <p class="figure-caption has-text-centered">
+      Two random samples per class of our generator, camera fixed, lit by a moving point light.
+    </p>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{gokbudak2026onecode,
+  title   = {One Code per Material: Neural Representation and Generation of Measured BTFs},
+  author  = {Fazilet Gokbudak and Canberk Baykal and Chenliang Zhou and Rafal Mantiuk and Cengiz Oztireli},
+  journal = {arXiv preprint arXiv:2611.20948},
+  year    = {2026}
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link" href="https://github.com/faziletgokbudak"><i class="fab fa-github"></i></a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>The website template was borrowed from <a href="https://github.com/nerfies/nerfies.github.io">nerfies' source code</a>.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---- reconstruction viewer ----
+  var MATS = ['carpet01', 'fabric01', 'fabric05', 'fabric07', 'felt01', 'leather01', 'stone01', 'wallpaper01', 'wood01'];
+  var METHODS = [['ours', 'Ours, per-material'], ['xia', 'Xia et al.'], ['neumip', 'NeuMIP'], ['ggx', 'GGX'],
+                 ['compact', 'Ours, compact'], ['rainer32', 'Rainer et al., d=32'], ['rainer8', 'Rainer et al., d=8'],
+                 ['biplanes', 'Neural Biplanes']];
+  var PAIRS = ['0° / 0°', '30° / 60°', '45° / 30°', '52° / 67°',
+               '60° / 37°', '67° / 75°', '75° / 53°', '75° / 75°'];
+  var state = {mat: 'fabric01', meth: 'ours', pair: 0};
+  // data inlined so the page also works when opened from disk (file://)
+  var PSNR = {"carpet01_d0_ours":29.63,"carpet01_d0_xia":27.01,"carpet01_d0_neumip":22.19,"carpet01_d0_ggx":24.67,"carpet01_d0_compact":25.4,"carpet01_d0_rainer32":25.24,"carpet01_d0_rainer8":24.15,"carpet01_d0_biplanes":24.58,"carpet01_d1_ours":32.09,"carpet01_d1_xia":28.94,"carpet01_d1_neumip":26.63,"carpet01_d1_ggx":26.15,"carpet01_d1_compact":27.56,"carpet01_d1_rainer32":27.66,"carpet01_d1_rainer8":26.84,"carpet01_d1_biplanes":25.48,"carpet01_d2_ours":29.71,"carpet01_d2_xia":27.88,"carpet01_d2_neumip":24.38,"carpet01_d2_ggx":22.1,"carpet01_d2_compact":25.34,"carpet01_d2_rainer32":26.52,"carpet01_d2_rainer8":24.58,"carpet01_d2_biplanes":24.33,"carpet01_d3_ours":27.7,"carpet01_d3_xia":27.03,"carpet01_d3_neumip":23.3,"carpet01_d3_ggx":22.38,"carpet01_d3_compact":24.35,"carpet01_d3_rainer32":24.96,"carpet01_d3_rainer8":24.11,"carpet01_d3_biplanes":22.73,"carpet01_d4_ours":30.77,"carpet01_d4_xia":28.78,"carpet01_d4_neumip":25.28,"carpet01_d4_ggx":23.32,"carpet01_d4_compact":26.69,"carpet01_d4_rainer32":28.64,"carpet01_d4_rainer8":26.57,"carpet01_d4_biplanes":24.17,"carpet01_d5_ours":28.85,"carpet01_d5_xia":28.03,"carpet01_d5_neumip":22.82,"carpet01_d5_ggx":24.47,"carpet01_d5_compact":26.03,"carpet01_d5_rainer32":26.69,"carpet01_d5_rainer8":25.19,"carpet01_d5_biplanes":24.84,"carpet01_d6_ours":27.46,"carpet01_d6_xia":27.17,"carpet01_d6_neumip":24.54,"carpet01_d6_ggx":15.17,"carpet01_d6_compact":23.86,"carpet01_d6_rainer32":25.14,"carpet01_d6_rainer8":23.83,"carpet01_d6_biplanes":20.57,"carpet01_d7_ours":27.22,"carpet01_d7_xia":27.2,"carpet01_d7_neumip":24.27,"carpet01_d7_ggx":21.17,"carpet01_d7_compact":24.91,"carpet01_d7_rainer32":24.74,"carpet01_d7_rainer8":24.64,"carpet01_d7_biplanes":22.75,"fabric01_d0_ours":31.05,"fabric01_d0_xia":28.93,"fabric01_d0_neumip":26.79,"fabric01_d0_ggx":26.1,"fabric01_d0_compact":28.06,"fabric01_d0_rainer32":27.1,"fabric01_d0_rainer8":25.46,"fabric01_d0_biplanes":23.76,"fabric01_d1_ours":35.56,"fabric01_d1_xia":33.34,"fabric01_d1_neumip":28.18,"fabric01_d1_ggx":20.38,"fabric01_d1_compact":32.14,"fabric01_d1_rainer32":31.11,"fabric01_d1_rainer8":26.35,"fabric01_d1_biplanes":24.38,"fabric01_d2_ours":32.81,"fabric01_d2_xia":30.53,"fabric01_d2_neumip":28.1,"fabric01_d2_ggx":24.45,"fabric01_d2_compact":29.94,"fabric01_d2_rainer32":29.82,"fabric01_d2_rainer8":27.25,"fabric01_d2_biplanes":23.86,"fabric01_d3_ours":33.66,"fabric01_d3_xia":32.42,"fabric01_d3_neumip":24.77,"fabric01_d3_ggx":24.07,"fabric01_d3_compact":30.29,"fabric01_d3_rainer32":28.55,"fabric01_d3_rainer8":24.18,"fabric01_d3_biplanes":23.61,"fabric01_d4_ours":31.87,"fabric01_d4_xia":30.17,"fabric01_d4_neumip":26.16,"fabric01_d4_ggx":19.08,"fabric01_d4_compact":28.69,"fabric01_d4_rainer32":29.8,"fabric01_d4_rainer8":26.33,"fabric01_d4_biplanes":21.22,"fabric01_d5_ours":31.68,"fabric01_d5_xia":30.43,"fabric01_d5_neumip":25.17,"fabric01_d5_ggx":18.78,"fabric01_d5_compact":28.72,"fabric01_d5_rainer32":27.91,"fabric01_d5_rainer8":24.67,"fabric01_d5_biplanes":23.61,"fabric01_d6_ours":33.26,"fabric01_d6_xia":32.24,"fabric01_d6_neumip":27.06,"fabric01_d6_ggx":16.8,"fabric01_d6_compact":30.81,"fabric01_d6_rainer32":29.77,"fabric01_d6_rainer8":27.6,"fabric01_d6_biplanes":25.15,"fabric01_d7_ours":30.29,"fabric01_d7_xia":28.37,"fabric01_d7_neumip":23.49,"fabric01_d7_ggx":19.39,"fabric01_d7_compact":27.83,"fabric01_d7_rainer32":25.69,"fabric01_d7_rainer8":21.87,"fabric01_d7_biplanes":21.26,"fabric05_d0_ours":30.21,"fabric05_d0_xia":24.93,"fabric05_d0_neumip":19.34,"fabric05_d0_ggx":23.93,"fabric05_d0_compact":27.88,"fabric05_d0_rainer32":26.6,"fabric05_d0_rainer8":25.83,"fabric05_d0_biplanes":25.15,"fabric05_d1_ours":34.41,"fabric05_d1_xia":30.6,"fabric05_d1_neumip":28.14,"fabric05_d1_ggx":21.76,"fabric05_d1_compact":32.08,"fabric05_d1_rainer32":31.49,"fabric05_d1_rainer8":27.75,"fabric05_d1_biplanes":26.52,"fabric05_d2_ours":32.23,"fabric05_d2_xia":26.58,"fabric05_d2_neumip":20.76,"fabric05_d2_ggx":22.35,"fabric05_d2_compact":29.5,"fabric05_d2_rainer32":25.99,"fabric05_d2_rainer8":24.03,"fabric05_d2_biplanes":24.74,"fabric05_d3_ours":30.73,"fabric05_d3_xia":29.28,"fabric05_d3_neumip":25.27,"fabric05_d3_ggx":23.44,"fabric05_d3_compact":28.78,"fabric05_d3_rainer32":25.03,"fabric05_d3_rainer8":24.15,"fabric05_d3_biplanes":24.36,"fabric05_d4_ours":31.68,"fabric05_d4_xia":28.08,"fabric05_d4_neumip":24.92,"fabric05_d4_ggx":19.86,"fabric05_d4_compact":29.26,"fabric05_d4_rainer32":30.87,"fabric05_d4_rainer8":27.57,"fabric05_d4_biplanes":23.05,"fabric05_d5_ours":30.94,"fabric05_d5_xia":31.07,"fabric05_d5_neumip":26.61,"fabric05_d5_ggx":18.07,"fabric05_d5_compact":29.6,"fabric05_d5_rainer32":26.83,"fabric05_d5_rainer8":26.82,"fabric05_d5_biplanes":24.31,"fabric05_d6_ours":32.39,"fabric05_d6_xia":30.56,"fabric05_d6_neumip":24.88,"fabric05_d6_ggx":18.27,"fabric05_d6_compact":30.75,"fabric05_d6_rainer32":26.57,"fabric05_d6_rainer8":25.12,"fabric05_d6_biplanes":22.86,"fabric05_d7_ours":28.53,"fabric05_d7_xia":27.2,"fabric05_d7_neumip":22.13,"fabric05_d7_ggx":17.8,"fabric05_d7_compact":26.35,"fabric05_d7_rainer32":24.79,"fabric05_d7_rainer8":19.54,"fabric05_d7_biplanes":18.8,"fabric07_d0_ours":31.1,"fabric07_d0_xia":27.91,"fabric07_d0_neumip":24.75,"fabric07_d0_ggx":16.69,"fabric07_d0_compact":24.39,"fabric07_d0_rainer32":24.5,"fabric07_d0_rainer8":22.07,"fabric07_d0_biplanes":23.19,"fabric07_d1_ours":43.59,"fabric07_d1_xia":38.86,"fabric07_d1_neumip":29.75,"fabric07_d1_ggx":18.27,"fabric07_d1_compact":38.33,"fabric07_d1_rainer32":30.49,"fabric07_d1_rainer8":32.76,"fabric07_d1_biplanes":24.7,"fabric07_d2_ours":40.18,"fabric07_d2_xia":34.38,"fabric07_d2_neumip":34.69,"fabric07_d2_ggx":29.33,"fabric07_d2_compact":33.64,"fabric07_d2_rainer32":32.54,"fabric07_d2_rainer8":31.11,"fabric07_d2_biplanes":29.55,"fabric07_d3_ours":43.51,"fabric07_d3_xia":39.11,"fabric07_d3_neumip":29.85,"fabric07_d3_ggx":21.43,"fabric07_d3_compact":38.05,"fabric07_d3_rainer32":28.24,"fabric07_d3_rainer8":32.63,"fabric07_d3_biplanes":27.67,"fabric07_d4_ours":38.54,"fabric07_d4_xia":33.72,"fabric07_d4_neumip":25.09,"fabric07_d4_ggx":28.45,"fabric07_d4_compact":30.31,"fabric07_d4_rainer32":31.54,"fabric07_d4_rainer8":28.86,"fabric07_d4_biplanes":24.58,"fabric07_d5_ours":46.82,"fabric07_d5_xia":34.25,"fabric07_d5_neumip":27.69,"fabric07_d5_ggx":21.26,"fabric07_d5_compact":41.09,"fabric07_d5_rainer32":27.58,"fabric07_d5_rainer8":27.35,"fabric07_d5_biplanes":20.52,"fabric07_d6_ours":45.85,"fabric07_d6_xia":35.3,"fabric07_d6_neumip":30.09,"fabric07_d6_ggx":20.42,"fabric07_d6_compact":43.3,"fabric07_d6_rainer32":26.6,"fabric07_d6_rainer8":30.35,"fabric07_d6_biplanes":19.84,"fabric07_d7_ours":36.4,"fabric07_d7_xia":33.73,"fabric07_d7_neumip":30.57,"fabric07_d7_ggx":17.27,"fabric07_d7_compact":33.66,"fabric07_d7_rainer32":25.3,"fabric07_d7_rainer8":31.56,"fabric07_d7_biplanes":23.64,"felt01_d0_ours":38.04,"felt01_d0_xia":34.04,"felt01_d0_neumip":30.54,"felt01_d0_ggx":24.03,"felt01_d0_compact":32.85,"felt01_d0_rainer32":33.24,"felt01_d0_rainer8":30.07,"felt01_d0_biplanes":26.04,"felt01_d1_ours":39.03,"felt01_d1_xia":35.24,"felt01_d1_neumip":30.56,"felt01_d1_ggx":20.58,"felt01_d1_compact":33.94,"felt01_d1_rainer32":34.57,"felt01_d1_rainer8":31.23,"felt01_d1_biplanes":28.2,"felt01_d2_ours":36.78,"felt01_d2_xia":33.92,"felt01_d2_neumip":29.8,"felt01_d2_ggx":24.77,"felt01_d2_compact":31.73,"felt01_d2_rainer32":33.57,"felt01_d2_rainer8":30.29,"felt01_d2_biplanes":27.01,"felt01_d3_ours":38.54,"felt01_d3_xia":34.99,"felt01_d3_neumip":31.44,"felt01_d3_ggx":26.02,"felt01_d3_compact":33.99,"felt01_d3_rainer32":34.47,"felt01_d3_rainer8":31.18,"felt01_d3_biplanes":27.97,"felt01_d4_ours":34.21,"felt01_d4_xia":31.75,"felt01_d4_neumip":29.31,"felt01_d4_ggx":20.96,"felt01_d4_compact":29.89,"felt01_d4_rainer32":31.4,"felt01_d4_rainer8":28.41,"felt01_d4_biplanes":23.07,"felt01_d5_ours":35.95,"felt01_d5_xia":33.5,"felt01_d5_neumip":30.74,"felt01_d5_ggx":19.87,"felt01_d5_compact":31.78,"felt01_d5_rainer32":32.01,"felt01_d5_rainer8":29.96,"felt01_d5_biplanes":25.12,"felt01_d6_ours":35.31,"felt01_d6_xia":33.89,"felt01_d6_neumip":24.08,"felt01_d6_ggx":12.49,"felt01_d6_compact":31.54,"felt01_d6_rainer32":30.81,"felt01_d6_rainer8":29.42,"felt01_d6_biplanes":24.76,"felt01_d7_ours":35.17,"felt01_d7_xia":33.58,"felt01_d7_neumip":29.54,"felt01_d7_ggx":12.4,"felt01_d7_compact":31.64,"felt01_d7_rainer32":29.18,"felt01_d7_rainer8":26.57,"felt01_d7_biplanes":21.27,"leather01_d0_ours":30.85,"leather01_d0_xia":28.42,"leather01_d0_neumip":21.99,"leather01_d0_ggx":26.94,"leather01_d0_compact":27.19,"leather01_d0_rainer32":28.11,"leather01_d0_rainer8":27.82,"leather01_d0_biplanes":23.75,"leather01_d1_ours":37.5,"leather01_d1_xia":37.25,"leather01_d1_neumip":31.84,"leather01_d1_ggx":25.34,"leather01_d1_compact":34.49,"leather01_d1_rainer32":36.69,"leather01_d1_rainer8":33.8,"leather01_d1_biplanes":27.78,"leather01_d2_ours":34.37,"leather01_d2_xia":33.57,"leather01_d2_neumip":28.9,"leather01_d2_ggx":30.86,"leather01_d2_compact":31.22,"leather01_d2_rainer32":31.67,"leather01_d2_rainer8":30.36,"leather01_d2_biplanes":28.5,"leather01_d3_ours":31.69,"leather01_d3_xia":30.85,"leather01_d3_neumip":25.24,"leather01_d3_ggx":24.49,"leather01_d3_compact":29.41,"leather01_d3_rainer32":28.5,"leather01_d3_rainer8":29.11,"leather01_d3_biplanes":25.68,"leather01_d4_ours":30.68,"leather01_d4_xia":28.62,"leather01_d4_neumip":25.7,"leather01_d4_ggx":26.72,"leather01_d4_compact":29.07,"leather01_d4_rainer32":30.46,"leather01_d4_rainer8":28.98,"leather01_d4_biplanes":23.88,"leather01_d5_ours":33.11,"leather01_d5_xia":31.91,"leather01_d5_neumip":27.93,"leather01_d5_ggx":26.38,"leather01_d5_compact":31.01,"leather01_d5_rainer32":30.75,"leather01_d5_rainer8":29.59,"leather01_d5_biplanes":27.07,"leather01_d6_ours":37.65,"leather01_d6_xia":27.99,"leather01_d6_neumip":30.97,"leather01_d6_ggx":20.66,"leather01_d6_compact":34.84,"leather01_d6_rainer32":34.84,"leather01_d6_rainer8":33.78,"leather01_d6_biplanes":23.23,"leather01_d7_ours":37.26,"leather01_d7_xia":30.36,"leather01_d7_neumip":28.64,"leather01_d7_ggx":19.06,"leather01_d7_compact":34.59,"leather01_d7_rainer32":33.81,"leather01_d7_rainer8":29.8,"leather01_d7_biplanes":23.08,"stone01_d0_ours":39.48,"stone01_d0_xia":36.11,"stone01_d0_neumip":27.57,"stone01_d0_ggx":19.59,"stone01_d0_compact":33.9,"stone01_d0_rainer32":29.64,"stone01_d0_rainer8":31.25,"stone01_d0_biplanes":26.54,"stone01_d1_ours":41.23,"stone01_d1_xia":36.05,"stone01_d1_neumip":34.59,"stone01_d1_ggx":17.21,"stone01_d1_compact":37.78,"stone01_d1_rainer32":40.55,"stone01_d1_rainer8":36.77,"stone01_d1_biplanes":31.94,"stone01_d2_ours":41.56,"stone01_d2_xia":40.45,"stone01_d2_neumip":30.05,"stone01_d2_ggx":34.07,"stone01_d2_compact":38.17,"stone01_d2_rainer32":38.71,"stone01_d2_rainer8":37.86,"stone01_d2_biplanes":35.14,"stone01_d3_ours":41.33,"stone01_d3_xia":38.41,"stone01_d3_neumip":28.41,"stone01_d3_ggx":28.11,"stone01_d3_compact":37.49,"stone01_d3_rainer32":37.77,"stone01_d3_rainer8":35.45,"stone01_d3_biplanes":34.55,"stone01_d4_ours":43.58,"stone01_d4_xia":39.49,"stone01_d4_neumip":36.13,"stone01_d4_ggx":32.19,"stone01_d4_compact":39.61,"stone01_d4_rainer32":36.77,"stone01_d4_rainer8":37.29,"stone01_d4_biplanes":32.76,"stone01_d5_ours":41.11,"stone01_d5_xia":39.47,"stone01_d5_neumip":21.81,"stone01_d5_ggx":23.68,"stone01_d5_compact":37.32,"stone01_d5_rainer32":37.83,"stone01_d5_rainer8":37.31,"stone01_d5_biplanes":33.02,"stone01_d6_ours":41.72,"stone01_d6_xia":35.65,"stone01_d6_neumip":22.52,"stone01_d6_ggx":15.55,"stone01_d6_compact":36.78,"stone01_d6_rainer32":32.52,"stone01_d6_rainer8":37.32,"stone01_d6_biplanes":31.19,"stone01_d7_ours":39.53,"stone01_d7_xia":34.64,"stone01_d7_neumip":28.47,"stone01_d7_ggx":14.12,"stone01_d7_compact":35.22,"stone01_d7_rainer32":36.19,"stone01_d7_rainer8":31.56,"stone01_d7_biplanes":29.69,"wallpaper01_d0_ours":34.25,"wallpaper01_d0_xia":31.69,"wallpaper01_d0_neumip":25.05,"wallpaper01_d0_ggx":17.14,"wallpaper01_d0_compact":31.37,"wallpaper01_d0_rainer32":30.05,"wallpaper01_d0_rainer8":26.62,"wallpaper01_d0_biplanes":23.06,"wallpaper01_d1_ours":45.62,"wallpaper01_d1_xia":39.18,"wallpaper01_d1_neumip":37.62,"wallpaper01_d1_ggx":18.56,"wallpaper01_d1_compact":41.54,"wallpaper01_d1_rainer32":39.04,"wallpaper01_d1_rainer8":35.81,"wallpaper01_d1_biplanes":30.44,"wallpaper01_d2_ours":42.11,"wallpaper01_d2_xia":37.91,"wallpaper01_d2_neumip":30.86,"wallpaper01_d2_ggx":24.01,"wallpaper01_d2_compact":37.81,"wallpaper01_d2_rainer32":35.43,"wallpaper01_d2_rainer8":34.01,"wallpaper01_d2_biplanes":28.48,"wallpaper01_d3_ours":42.33,"wallpaper01_d3_xia":38.89,"wallpaper01_d3_neumip":34.39,"wallpaper01_d3_ggx":29.71,"wallpaper01_d3_compact":37.02,"wallpaper01_d3_rainer32":36.47,"wallpaper01_d3_rainer8":33.0,"wallpaper01_d3_biplanes":31.16,"wallpaper01_d4_ours":38.48,"wallpaper01_d4_xia":37.0,"wallpaper01_d4_neumip":29.03,"wallpaper01_d4_ggx":21.15,"wallpaper01_d4_compact":33.36,"wallpaper01_d4_rainer32":36.25,"wallpaper01_d4_rainer8":32.92,"wallpaper01_d4_biplanes":29.21,"wallpaper01_d5_ours":38.97,"wallpaper01_d5_xia":37.65,"wallpaper01_d5_neumip":30.1,"wallpaper01_d5_ggx":20.31,"wallpaper01_d5_compact":34.92,"wallpaper01_d5_rainer32":35.47,"wallpaper01_d5_rainer8":32.61,"wallpaper01_d5_biplanes":28.9,"wallpaper01_d6_ours":38.97,"wallpaper01_d6_xia":37.34,"wallpaper01_d6_neumip":29.23,"wallpaper01_d6_ggx":16.78,"wallpaper01_d6_compact":34.58,"wallpaper01_d6_rainer32":33.19,"wallpaper01_d6_rainer8":31.16,"wallpaper01_d6_biplanes":29.46,"wallpaper01_d7_ours":38.65,"wallpaper01_d7_xia":34.64,"wallpaper01_d7_neumip":28.86,"wallpaper01_d7_ggx":22.11,"wallpaper01_d7_compact":34.18,"wallpaper01_d7_rainer32":31.32,"wallpaper01_d7_rainer8":27.93,"wallpaper01_d7_biplanes":24.04,"wood01_d0_ours":35.77,"wood01_d0_xia":27.47,"wood01_d0_neumip":32.28,"wood01_d0_ggx":18.21,"wood01_d0_compact":32.1,"wood01_d0_rainer32":28.44,"wood01_d0_rainer8":27.72,"wood01_d0_biplanes":30.57,"wood01_d1_ours":41.63,"wood01_d1_xia":37.8,"wood01_d1_neumip":33.82,"wood01_d1_ggx":17.95,"wood01_d1_compact":35.76,"wood01_d1_rainer32":39.92,"wood01_d1_rainer8":33.15,"wood01_d1_biplanes":30.22,"wood01_d2_ours":44.58,"wood01_d2_xia":37.52,"wood01_d2_neumip":38.98,"wood01_d2_ggx":35.85,"wood01_d2_compact":39.11,"wood01_d2_rainer32":39.36,"wood01_d2_rainer8":40.48,"wood01_d2_biplanes":30.28,"wood01_d3_ours":43.85,"wood01_d3_xia":43.01,"wood01_d3_neumip":38.63,"wood01_d3_ggx":31.27,"wood01_d3_compact":39.12,"wood01_d3_rainer32":38.93,"wood01_d3_rainer8":39.3,"wood01_d3_biplanes":33.4,"wood01_d4_ours":41.26,"wood01_d4_xia":35.69,"wood01_d4_neumip":32.24,"wood01_d4_ggx":30.68,"wood01_d4_compact":35.73,"wood01_d4_rainer32":35.37,"wood01_d4_rainer8":38.62,"wood01_d4_biplanes":23.68,"wood01_d5_ours":40.42,"wood01_d5_xia":39.51,"wood01_d5_neumip":33.86,"wood01_d5_ggx":22.99,"wood01_d5_compact":35.4,"wood01_d5_rainer32":34.41,"wood01_d5_rainer8":35.37,"wood01_d5_biplanes":31.57,"wood01_d6_ours":43.77,"wood01_d6_xia":40.6,"wood01_d6_neumip":36.14,"wood01_d6_ggx":15.59,"wood01_d6_compact":39.75,"wood01_d6_rainer32":40.34,"wood01_d6_rainer8":39.59,"wood01_d6_biplanes":30.57,"wood01_d7_ours":40.28,"wood01_d7_xia":40.52,"wood01_d7_neumip":34.21,"wood01_d7_ggx":15.81,"wood01_d7_compact":36.89,"wood01_d7_rainer32":34.01,"wood01_d7_rainer8":36.72,"wood01_d7_biplanes":26.68};
+  var RELIGHT_META = [{"id":23,"cls":"carpet","n":48},{"id":61,"cls":"carpet","n":48},{"id":110,"cls":"fabric","n":48},{"id":177,"cls":"fabric","n":48},{"id":234,"cls":"felt","n":48},{"id":249,"cls":"felt","n":48},{"id":308,"cls":"leather","n":48},{"id":343,"cls":"leather","n":48},{"id":404,"cls":"stone","n":48},{"id":466,"cls":"stone","n":48},{"id":491,"cls":"wallpaper","n":48},{"id":504,"cls":"wallpaper","n":48},{"id":582,"cls":"wood","n":48},{"id":622,"cls":"wood","n":48}];
+
+  function chips(id, items, key) {
+    var row = $('#' + id);
+    items.forEach(function (it) {
+      var v = Array.isArray(it) ? it[0] : it, label = Array.isArray(it) ? it[1] : it;
+      $('<button class="button is-small is-rounded"></button>').text(label).attr('data-v', v).appendTo(row)
+        .on('click', function () { state[key] = v; update(); });
+    });
+  }
+  function update() {
+    var base = './static/recon/' + state.mat + '_d' + state.pair;
+    $('#cmp-gt').attr('src', base + '_gt.jpg');
+    $('#cmp-top').attr('src', base + '_' + state.meth + '.jpg');
+    var name = METHODS.filter(function (m) { return m[0] === state.meth; })[0][1];
+    $('#cmp-label-left').text(name);
+    $('#pair-label').text('light / view elevation ' + PAIRS[state.pair]);
+    var p = PSNR[state.mat + '_d' + state.pair + '_' + state.meth];
+    $('#psnr-label').text(p === undefined ? '' : name + ': ' + p.toFixed(1) + ' dB PSNR');
+    $('#mat-buttons .button').each(function () { $(this).toggleClass('is-selected', $(this).attr('data-v') === state.mat); });
+    $('#meth-buttons .button').each(function () { $(this).toggleClass('is-selected', $(this).attr('data-v') === state.meth); });
+  }
+  function setSplit(e) {
+    var r = document.getElementById('cmp').getBoundingClientRect();
+    var x = (e.touches ? e.touches[0].clientX : e.clientX) - r.left;
+    var f = Math.max(0, Math.min(1, x / r.width));
+    $('#cmp-top').css('clip-path', 'inset(0 ' + (100 - 100 * f) + '% 0 0)');
+    $('#cmp-line').css('left', (100 * f) + '%');
+  }
+
+  // ---- relighting ----
+  var RELIGHT = [], playing = null;
+  function setLight(k) {
+    $('#relight-slider').val(k);
+    $('.relight-tile').each(function () {
+      var n = +$(this).attr('data-n');
+      $(this).css('background-position', (100 * Math.min(k, n - 1) / (n - 1)) + '% 0');
+    });
+  }
+
+  $(function () {
+    chips('mat-buttons', MATS, 'mat');
+    chips('meth-buttons', METHODS, 'meth');
+    $('#pair').on('input', function () { state.pair = +this.value; update(); });
+    $('#cmp').on('mousemove touchmove', setSplit);
+    update();
+
+    (function (meta) {
+      RELIGHT = meta;
+      var grid = $('#relight-grid');
+      // two samples per class: first row one sample of each class, second row the other
+      [0, 1].forEach(function (j) {
+        ['carpet', 'fabric', 'felt', 'leather', 'stone', 'wallpaper', 'wood'].forEach(function (c) {
+          var s = meta.filter(function (m) { return m.cls === c; })[j];
+          if (!s) return;
+          var cell = $('<div></div>').appendTo(grid);
+          $('<div class="relight-tile"></div>').attr('data-n', s.n).css({
+            'background-image': 'url(./static/relight/sample' + s.id + '.jpg)',
+            'background-size': (100 * s.n) + '% 100%'
+          }).appendTo(cell);
+          if (j === 0) $('<div class="relight-cls"></div>').text(c).appendTo(cell);
+        });
+      });
+      setLight(0);
+    })(RELIGHT_META);
+    $('#relight-slider').on('input', function () { setLight(+this.value); });
+    $('#relight-play').on('click', function () {
+      if (playing) { clearInterval(playing); playing = null; $(this).html('&#9654; play'); return; }
+      $(this).html('&#10074;&#10074; pause');
+      playing = setInterval(function () { setLight((+$('#relight-slider').val() + 1) % 48); }, 80);
+    });
+  });
+</script>
+</body>
+</html>
